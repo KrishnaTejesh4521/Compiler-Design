@@ -1,0 +1,24 @@
+%{
+#include<stdio.h>
+int ws=0,nl=0;
+%}
+
+%%
+
+[ ]     {ws++;}
+\n      {nl++;}
+.       ;
+
+%%
+
+int yywrap()
+{
+return 1;
+}
+
+int main()
+{
+yylex();
+printf("Whitespaces=%d\n",ws);
+printf("Newlines=%d\n",nl);
+}

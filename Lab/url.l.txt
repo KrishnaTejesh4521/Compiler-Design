@@ -1,0 +1,22 @@
+%{
+#include<stdio.h>
+%}
+
+%%
+
+https?:\/\/.*\n   { printf("URL Valid\n"); }
+.*\n              { printf("URL Invalid\n"); }
+
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("Enter URL: ");
+    yylex();
+    return 0;
+}

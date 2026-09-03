@@ -1,0 +1,33 @@
+%{
+#include<stdio.h>
+
+int chars=0,words=0,lines=0;
+FILE *yyin;
+%}
+
+%%
+
+\n          {lines++; chars++;}
+[ \t]+      {chars+=yyleng;}
+[a-zA-Z0-9_]+ {words++; chars+=yyleng;}
+.           {chars++;}
+
+%%
+
+int yywrap()
+{
+return 1;
+}
+
+int main(int argc,char *argv[])
+{
+yyin=fopen(argv[1],"r");
+
+yylex();
+
+printf("Characters = %d\n",chars);
+printf("Words = %d\n",words);
+printf("Lines = %d\n",lines);
+
+return 0;
+}
